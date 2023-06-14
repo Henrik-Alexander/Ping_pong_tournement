@@ -92,6 +92,9 @@ create_double_teams <- function(data) {
                                      stringsAsFactors = FALSE))
   }
   
+  # Create a team number
+  double_teams$team_number <- 1:nrow(double_teams)
+  
   return(double_teams)
 }
 
@@ -103,5 +106,8 @@ group2 <- subset(group2, select = c(name, surname, email))
 teams1 <- create_double_teams(group1)
 teams2 <- create_double_teams(group2)
 
+### Save the results
+write.csv(teams1, "Teams/teams1.csv")
+write.csv(teams2, "Teams/teams2.csv")
 
 ### END #####################################
