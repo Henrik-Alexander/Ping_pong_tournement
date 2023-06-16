@@ -14,12 +14,26 @@ library(tidyverse)
 library(data.table)
 library(readxl)
 library(janitor)
-
-# Load the data
-d <- read_xlsx("ParticipantsTableTennisTournament.xlsx", skip = 2, col_names = TRUE)
+library(httr)
+library(rvest)
 
 # Set seed
 set.seed(888)
+
+# Create the folder structure
+if(!file.exists("Raw")){
+dir.create("Raw")
+dir.create("Teams")
+}
+
+
+# IMPORTANT:
+# The file has to be downloaded and stored in "~/Raw/"
+
+### Load the data -----------------
+
+# Load the data
+d <- read_xlsx("Raw/ParticipantsTableTennisTournament.xlsx", skip = 2, col_names = TRUE)
 
 ### Data cleaning -------------------
 
@@ -63,7 +77,7 @@ group1 <- bind_rows(group1, left[left_group == 1, ])
 group2 <- bind_rows(group2, left[left_group == 2, ])
 
 
-### Make Parings ---------------------
+### Make teams ---------------------
 
 ### Function to create pairings
 create_double_teams <- function(data) {
@@ -98,15 +112,21 @@ create_double_teams <- function(data) {
   return(double_teams)
 }
 
-### Remove excess variables
+# Remove excess variables
 group1 <- subset(group1, select = c(name, surname, email))
 group2 <- subset(group2, select = c(name, surname, email))
 
-### Make the teams for group 1
+# Make the teams for group 1
 teams1 <- create_double_teams(group1)
 teams2 <- create_double_teams(group2)
 
-### Save the results
+# Create team names
+group1$teams <- paste0("Team ", LETTERS[1:nrow(group1)], "1")
+group2$teams <- paste0("Team ", LETTERS[1:nrow(group2)], "2")
+
+### Save the results ------------------------
+
+# Save
 write.csv(teams1, "Teams/teams1.csv")
 write.csv(teams2, "Teams/teams2.csv")
 
