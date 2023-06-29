@@ -121,8 +121,8 @@ schedule1$Loser  <- schedule2$Loser  <- "Lost"
 
 
 # Export the results
-write.csv(schedule1, file = "Teams/schedule1.csv")
-write.csv(schedule2, file = "Teams/schedule2.csv")
+write.csv(schedule1, file = "Teams/schedule1.csv", fileEncoding = "latin1")
+write.csv(schedule2, file = "Teams/schedule2.csv", fileEncoding = "latin1")
 
 
 ### END #############################
