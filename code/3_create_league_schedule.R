@@ -127,7 +127,7 @@ create_tournament_schedule <- function (teamvector, randomize = TRUE, seed = 999
   schedule <- schedule[order(schedule$Home, schedule$Away), ]
   schedule$Week <- rep(weeks, length = nrow(schedule))
   schedule <- schedule[order(schedule$Week), c("Week", "Home", "Away")]
-
+  
   return(schedule)
 }
 
@@ -152,6 +152,8 @@ schedule1 <- left_join(schedule1, group1, by = c("Home" = "teams")) |>
   left_join(group1, by = c("Away" = "teams"), suffix = c("_home", "_away"))
 schedule2 <- left_join(schedule2, group2, by = c("Home" = "teams")) |> 
   left_join(group2, by = c("Away" = "teams"), suffix = c("_home", "_away"))
+
+
 
 # Export the results
 write.csv(schedule1, file = "Teams/schedule1.csv")
