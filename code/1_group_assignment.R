@@ -127,7 +127,10 @@ group2$teams <- paste0("Team ", LETTERS[1:nrow(group2)], "2")
 ### Save the results ------------------------
 
 # Save
-write.csv(teams1, "Teams/teams1.csv")
-write.csv(teams2, "Teams/teams2.csv")
+write.csv(teams1, "Teams/teams1.csv", fileEncoding = "latin1")
+write.csv(teams2, "Teams/teams2.csv", fileEncoding = "latin1")
+
+# -------------------------------------------------------------------------
+
 
 ### END #####################################
