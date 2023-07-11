@@ -47,7 +47,7 @@ miss1 <- n_teams - length(winner1)
 miss2 <- n_teams - length(winner2)
 
 # Get the teams that have one only one game
-cand1 <- d1$Loser[d1$Loser %!in% c(winner1, "Lost")]
+cand1 <- d1$Winner[d1$Winner %!in% c(winner1, "Win")]
 cand2 <- d2$winner[d2$winner %!in% c(winner2, "Win")]
 
 # Randomly select the fill teams ------
